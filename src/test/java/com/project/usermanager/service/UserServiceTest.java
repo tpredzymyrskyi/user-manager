@@ -38,13 +38,13 @@ public class UserServiceTest {
 
     @Test(expected = UserNotFoundException.class)
     public void updateUserShouldThrowExceptionWhenNoUserFound() {
-        userService.updateUser(1L, getUser());
+        userService.updateUser("1", getUser());
         when(userRepository.findById(any())).thenThrow(UserNotFoundException.class);
     }
 
     private User getUser() {
         User user = new User();
-        Long userId = 1L;
+        String userId = "1";
         user.setId(userId);
         user.setName("Test");
         user.setAge(10L);

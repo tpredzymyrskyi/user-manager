@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable Long userId) {
+    public ResponseEntity<User> getUser(@PathVariable String userId) {
         User user = userService.getUser(userId);
         return ResponseEntity.ok(user);
     }
@@ -39,14 +39,14 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User newUser) {
+    public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User newUser) {
         User savedUser = userService.updateUser(userId, newUser);
         savedUser.add(linkTo(methodOn(UserController.class).getUser(savedUser.getId())).withSelfRel());
         return ResponseEntity.ok(savedUser);
     }
 
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
+    public void deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
     }
 }

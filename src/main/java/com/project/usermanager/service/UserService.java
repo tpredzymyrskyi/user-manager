@@ -18,11 +18,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUser(Long userId) {
+    public User getUser(String userId) {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
     }
 
-    public User updateUser(Long userId, User newUser) {
+    public User updateUser(String userId, User newUser) {
         return userRepository.findById(userId)
                 .map(user -> {
                     user.setName(newUser.getName());
@@ -32,7 +32,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteUser(String userId) {
         userRepository.deleteById(userId);
     }
 }

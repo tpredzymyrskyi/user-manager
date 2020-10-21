@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,7 +33,7 @@ public class UserControllerTest {
     @Test
     public void getUserShouldReturnCorrectUser() throws Exception {
         User savedUser = getUser();
-        when(userService.getUser(anyLong())).thenReturn(savedUser);
+        when(userService.getUser(anyString())).thenReturn(savedUser);
         MvcResult mvcResult = mockMvc
                 .perform(get("/user/" + savedUser.getId()))
                 .andDo(MockMvcResultHandlers.print())
@@ -54,7 +54,7 @@ public class UserControllerTest {
 
     private User getUser() {
         User user = new User();
-        Long userId = 1L;
+        String userId = "1";
         user.setId(userId);
         user.setName("Test");
         user.setAge(10L);
